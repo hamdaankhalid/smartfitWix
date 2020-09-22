@@ -69,7 +69,7 @@ var URL = window.webkitURL || window.URL;
  redrawBackImage.crossOrigin = "anonymous";
 
 // Front Image  File Input 
-frontFile.addEventListener('click', handleFrontFile);
+frontFile.addEventListener('change', handleFrontFile);
 
 function handleFrontFile(e) {
     if(heightgiven==true){
@@ -110,7 +110,7 @@ function handleFrontFile(e) {
 
 // Side Image  File Input 
 
-sideFile.addEventListener('click',handleSideFile);
+sideFile.addEventListener('change',handleSideFile);
 function handleSideFile(e) {
     if(heightgiven==true){
     var reader  = new FileReader();
@@ -143,7 +143,7 @@ function handleSideFile(e) {
 }
 
 // Back Image  File Input 
-backFile.addEventListener('click',handleBackFile, false);
+backFile.addEventListener('change',handleBackFile, false);
 
 function handleBackFile(e) {
     if(heightgiven){
