@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFit</title> 
+   <!-- Load TensorFlow.js -->
+   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+   <!-- Load BodyPix -->
+   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0.5/dist/body-pix.min.js"></script>
+   
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/52df784250.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+    <div class="jumbotron jumbotron-fluid" style="padding-top: 10px !important;
+    padding-bottom: 10px !important ; margin-bottom: 1%;" id="heading">
+        <div class="container">
+        <h1 class="display-4">SmartFit <i class="fas fa-camera"></i></h1> 
+
+        <div style="display: inline-block;"><p class="lead">Virtual Custom Clothing Measurements</p></div>
+        <div style="display: inline-block; float: right;"><a href="#contact">Contact Us</a></div>
+        
+      </div>
+    </div>
+
+    <div style="padding: 2%; padding-left: 12%; ">
+        <!-- DEMO TUTORIAL DIV -->
+        <div id = "intro"  > 
+            <h2> 
+                    Demo / Tutorial
+            </h2>
+            <video width="500" height="300" style="padding: 0%;" controls>
+            
+                <source src="demo.mp4" type="video/mp4">
+            </video>
+        </div> 
+
+         <!-- collapsible div of what an ideal image is supposed to look like -->
+         <div style="margin-top: 3%;">
+            <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              How To Take Pictures 
+            </button>
+          
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <img src="example.png" alt="" height="300" width="500">
+            </div>
+          </div>
+    </div>
+
+
+    </div>
+    
+          
+
+       
+        
+
+
+        <hr>
+    
+
+    <div style="padding-left: 9%; padding-right: 50%; ">
+        <h2>  
+                Measure    
+        </h2>
+        
+        <!-- Take User Height -->
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Client Height: </span>
+        </div>
+        <input type="number" id="height" class="form-control" placeholder="Inches" aria-label="Username" aria-describedby="basic-addon1">
+        <!-- <button id="submitheight" class="btn btn-dark" style="margin-left: 1%;">Submit</button> -->
+        </div>
+
+    </div>
+    
+
+    <!-- Canvases Inside Carousel -->
+    <div style="padding:5%; padding-top: 1%; padding-bottom: 0%;">
+
+        <div id="carouselExampleControls" class="carousel slide"  data-interval="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active" style="padding-left: 25%;">
+                <!-- Take user input for Front image -->
+                <div class="input-group mb-3" style="padding-right:50%;">
+                    <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="frontfile">
+                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose Front Image</label>
+                    </div>
+                    <!-- <div class="input-group-append">
+                    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+                    </div> -->
+                    <button id="calibfront" class="btn btn-dark" style="margin-left: 5%;;">Re-calibrate</button>
+                </div>
+                
+                <!-- Front Canvas -->
+                <canvas style="border:1px solid lightgray;" id="mycanvas" height="600px", width="500px" ></canvas>
+              </div>
+              <div class="carousel-item" style="padding-left: 25%;">
+                    <!-- Take user input for Side image -->
+
+                    <div class="input-group mb-3" style="padding-right:50%;">
+                        <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="sideFile">
+                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose Side Image</label>
+                        </div>
+                        <!-- <div class="input-group-append">
+                        <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+                        </div> -->
+                        <button id="calibSide" class="btn btn-dark" style="margin-left: 5%;;">Re-calibrate</button>
+                    </div>
+
+                <!-- Side Canvas -->
+                <canvas style="border:1px solid lightgray;" id="mycanvasSide" height="600px", width="500px"></canvas>
+              </div>
+              <div class="carousel-item" style="padding-left: 25%;">
+
+                <!-- Take user input for Back image -->
+                <div class="input-group mb-3" style="padding-right:50%;">
+                    <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="backFile">
+                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose Back Image</label>
+                    </div>
+                    <!-- <div class="input-group-append">
+                    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+                    </div> -->
+                    <button id="calibBack" class="btn btn-dark" style="margin-left: 5%;;">Re-calibrate</button>
+                </div>
+
+
+                <!-- Back Canvas -->
+                <canvas style="border:1px solid lightgray;" id="mycanvasBack" height="600px", width="500px"></canvas>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
+    </div>
+    
+    <div style="padding-left: 5%;">
+    
+        <div>
+            <!-- Rounded switch -->
+        <label for="">Length</label>
+        <label class="switch">
+            <input type="checkbox" id="lenorcircum">
+            <span class="slider round"></span>
+          </label>
+          <label for="">Circumference</label>
+        </div>
+        
+        
+        <div >
+            <div>
+            <input type="text" placeholder="Label Measurement" id="label">  
+            <label for="len" id="templenview"> </label>
+            <button id="confirm" class="btn btn-dark" style="margin-left: 3%;">Confirm</button> <button id="redo" class="btn btn-dark" style="margin-left: 1%;">Redo</button>
+        
+            </div>
+            
+            <div id="viewmeasures" style="border: 2px solid gray; height:auto; margin-top: 2%; margin-right: 20%;">
+
+            </div>
+
+            <button id="deletemeasurements" class="btn btn-dark" style="margin-top: 3%;">Delete All</button> <button id="deletelast" class="btn btn-dark" style="margin-left: 1%;margin-top: 3%;">Delete Last</button>
+        
+    
+        </div>
+        
+
+    </div>
+    
+<hr>
+
+<!-- EMAIL -->
+<div class="float-container">
+
+    <div class="float-child">
+      
+        <div class="input-group" style="padding:2%; ">
+            <div class="input-group-prepend">
+              <span class="input-group-text">First and Last Name / Company Name:</span>
+            </div>
+            <input type="text" id="name" aria-label="First name" class="form-control">
+        </div>
+    
+        <div class="input-group" style="padding:2%; ">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Client Name:</span>
+            </div>
+            <input type="text" id="clientname" aria-label="First name" class="form-control">
+        </div>
+    
+    
+        <div class="input-group" style="padding:2%; ">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Email Measurements To :</span>
+            </div>
+            <input type="email" id="emailto"  class="form-control" >
+        </div>
+    
+    </div>
+    
+    <div class="float-child">
+  
+        <div class="input-group" >
+            <div class="input-group-prepend">
+              <span class="input-group-text">Notes</span>
+            </div>
+            <textarea id="notes" class="form-control" aria-label="With textarea" style="height: 183px;"></textarea>
+          </div>
+          
+    </div>
+
+</div>
+
+    <div style="margin: auto; padding-left: 40%;">
+        <button id="sendemail" class="btn btn-dark" >Email Measurements</button>
+    </div>
+
+
+    <!-- Footer -->
+    
+    <footer style="background-color: lightgray; padding-bottom: 2%;">
+        <hr>
+        <div style="padding: 2%; padding-top: 1%; padding-bottom: 0%;" id="contact"> 
+            <b>Contact Us:</b>
+             <br>
+            <i class="fas fa-phone"></i> : <a href="tel:+12246074296">+1(224)-(607)-(4296)</a><br>
+            <i class="fas fa-envelope-square"></i> : <a href = "mailto: khalid.hamdaan@gmail.com">khalid.hamdaan@gmail.com</a> <br>
+            <i class="fab fa-linkedin"></i> : <a href=" https://www.linkedin.com/in/hamdaan-khalid-a6698b149/"> Linkedin</a>
+        </div>
+        <hr>
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="#heading"> SmartFit </a>
+        </div>
+        <!-- Copyright -->
+    
+    </footer>
+
+</body>
+<script src="smartfit.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
+</script>
+
+<script type="text/javascript">
+  emailjs.init('user_GL6uWCpcAQnovRuFkSiBR');
+</script>
+
+</html>
