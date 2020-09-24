@@ -4,11 +4,18 @@
 // User Height Input
 var height;
 var heightgiven = false;
+document.getElementById("frontfile").disabled = true;
+document.getElementById("sidefile").disabled = true;
+document.getElementById("backfile").disabled = true;
+
 var heightEntry = document.getElementById('height');
 
 heightEntry.addEventListener("change", function(){
     height = document.getElementById('height').value;
     heightgiven = true;
+    document.getElementById("frontfile").disabled = false;
+    document.getElementById("sidefile").disabled = false;
+    document.getElementById("backfile").disabled = false;
 });
 
 // FILE IMAGE INPUT AND PREPROCESSING ON CANVASES
