@@ -5,8 +5,8 @@
 var height;
 var heightgiven = false;
 document.getElementById("frontfile").disabled = true;
-document.getElementById("sidefile").disabled = true;
-document.getElementById("backfile").disabled = true;
+document.getElementById("sideFile").disabled = true;
+document.getElementById("backFile").disabled = true;
 
 var heightEntry = document.getElementById('height');
 
@@ -14,8 +14,8 @@ heightEntry.addEventListener("change", function(){
     height = document.getElementById('height').value;
     heightgiven = true;
     document.getElementById("frontfile").disabled = false;
-    document.getElementById("sidefile").disabled = false;
-    document.getElementById("backfile").disabled = false;
+    document.getElementById("sideFile").disabled = false;
+    document.getElementById("backFile").disabled = false;
 });
 
 // FILE IMAGE INPUT AND PREPROCESSING ON CANVASES
