@@ -7,6 +7,9 @@ var heightgiven = false;
 document.getElementById("frontfile").disabled = true;
 document.getElementById("sideFile").disabled = true;
 document.getElementById("backFile").disabled = true;
+document.getElementById("frontfilelabel").innerHTML = "Enter Height Above";
+document.getElementById("sidefilelabel").innerHTML = "Enter Height Above";
+document.getElementById("backfilelabel").innerHTML = "Enter Height Above";
 
 var heightEntry = document.getElementById('height');
 
@@ -16,6 +19,9 @@ heightEntry.addEventListener("change", function(){
     document.getElementById("frontfile").disabled = false;
     document.getElementById("sideFile").disabled = false;
     document.getElementById("backFile").disabled = false;
+	document.getElementById("frontfilelabel").innerHTML = "Choose Front Image";
+	document.getElementById("sidefilelabel").innerHTML = "Choose Side Image";
+	document.getElementById("backfilelabel").innerHTML = "Choose Back image";
 });
 
 // FILE IMAGE INPUT AND PREPROCESSING ON CANVASES
