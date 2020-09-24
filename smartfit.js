@@ -103,7 +103,6 @@ function handleFrontFile(e) {
     }
     else{
         window.alert("Please Enter Client's Height Before Uploading Image");
-	e="";
     }
     
 }
