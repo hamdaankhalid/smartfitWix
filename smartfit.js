@@ -698,7 +698,7 @@ function (evt){
     var message = "\n";
     for (var i in measurements){
         
-        message += measurements[i]["key"] + " : " + measurements[i]["value"] + " inches "+"\n" ;
+        message += measurements[i]["key"] + " : " + measurements[i]["value"] + " inches,	 	"+"\n" ;
     
       }
 
